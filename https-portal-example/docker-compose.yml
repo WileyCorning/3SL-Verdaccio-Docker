@@ -17,6 +17,6 @@ services:
     links:
       - verdaccio:verdaccio
     environment:
-      DOMAINS: 'upm.threespace.dev -> http://verdaccio:4873'
+      DOMAINS: 'npm.threespace.dev -> http://verdaccio:4873'
       STAGE: 'production'
       FORCE_RENEW: 'true'
