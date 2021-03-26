@@ -2,7 +2,7 @@ version: '2'
 
 services:
   verdaccio:
-    image: verdaccio/verdaccio:4
+    image: pixelcanvas/verdaccio-github-oauth-ui
     container_name: verdaccio-https
     ports:
       - "4873:4873"
@@ -17,6 +17,9 @@ services:
     links:
       - verdaccio:verdaccio
     environment:
-      DOMAINS: 'npm.threespace.dev -> http://verdaccio:4873'
+      DOMAINS:
+        'npm.threespace.dev -> http://verdaccio:4873'
+        # 'temp.threespace.dev -> http://verdaccio:4873'
+      CLIENT_MAX_BODY_SIZE: 0
       STAGE: 'production'
-      FORCE_RENEW: 'true'
+      FORCE_RENEW: 'false'

@@ -4,6 +4,10 @@ storage: /verdaccio/storage
 auth:
   htpasswd:
     file: /verdaccio/conf/htpasswd
+  github-oauth-ui:
+    org: threespace
+    client-id: 20fa6aa32e76e3b59127
+    client-secret: 40f0123a5c9a0d54cebf511e5f9757e12c3b1160
 
 uplinks:
   npmjs:
@@ -12,17 +16,22 @@ uplinks:
 middlewares:
   audit:
     enabled: true
+  github-oauth-ui:
+    enabled: true
 
 packages:
   '@*/*':
-    access: $all
-    publish: $all
+    access: $authenticated
+    publish: $authenticated
     proxy: npmjs
 
   '**':
-    access: $all
-    publish: $all
+    access: $authenticated
+    publish: $authenticated
     proxy: npmjs
 
 logs:
   - {type: stdout, format: pretty, level: trace}
+  - {type: file, path: /verdaccio/storage/verdaccio.log, level: trace}
+
+max_body_size: 1000mb
